@@ -18,16 +18,3 @@ public class Servidor {
         
     } 
 }
-
-/*
-
-To serialize:
-
-byte[] data = SerializationUtils.serialize(yourObject);
-
-
-To deserialize:
-
-Libro libro = SerializationUtils.deserialize(data);
-
-*/

@@ -1,5 +1,13 @@
-
 package GUI;
+
+import Data.DiskNodeData;
+import Domain.DiskNode;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import servidor.ControllerNode;
 
 /**
  *
@@ -7,13 +15,29 @@ package GUI;
  */
 public class Window extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Window
-     */
     public Window() {
-        initComponents();
-    }
+        try {
+            initComponents();
 
+            DiskNodeData d = new DiskNodeData();
+            ArrayList<DiskNode> list = d.getActiveList();
+
+            
+            String[] es = new String[list.size()];
+            
+            for (int i = 0; i < es.length; i++) {
+                es[i] = String.valueOf(list.get(i).getNumber());
+            }
+            
+            jComboBox1 = new JComboBox<>(es);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,24 +51,28 @@ public class Window extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Server");
         setBackground(new java.awt.Color(255, 102, 0));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disk 1", "Disk 2", "Disk 3", "backup" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("active disks:");
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
 
-        jButton1.setBackground(new java.awt.Color(102, 255, 102));
+        jButton1.setBackground(new java.awt.Color(51, 102, 0));
         jButton1.setText("Add disk node");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 51, 51));
-        jButton2.setText("delete disk node");
+        jButton2.setText("disable disk node");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,7 +113,7 @@ public class Window extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(93, 93, 93)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addGap(0, 80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +133,31 @@ public class Window extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ControllerNode cN = new ControllerNode();
+        try {
+            cN.addDisk();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        int number = Integer.parseInt(jTextField1.getText());
+
+        ControllerNode cN = new ControllerNode();
+        try {
+            cN.disableDisk(number);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

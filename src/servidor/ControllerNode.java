@@ -1,8 +1,10 @@
-
 package servidor;
 
+import Data.DiskNodeData;
+import Domain.DiskNode;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,15 +28,23 @@ public class ControllerNode extends Thread {
             DatagramSocket socketUDP = new DatagramSocket(puerto);
 
             byte[] buffer = new byte[1000];
-            
+
             while (true) {
 
                 DatagramPacket datagramPacketReceived = new DatagramPacket(buffer, buffer.length);//envio de un  paquete 
                 socketUDP.receive(datagramPacketReceived);
-                
+
                 System.out.println("solicitud recibida!");
 
-                // trabajar con el datagramPacketReceived aquí  (hacer un if para ver que tipo de solicitud es)
+                String peticionLlegada = new String(datagramPacketReceived.getData(), 0, datagramPacketReceived.getLength());
+
+                if (peticionLlegada.equalsIgnoreCase("registrar")) {
+
+                }
+
+                if (peticionLlegada.equalsIgnoreCase("lista")) {
+
+                }
 
                 Thread.sleep(100);
 
@@ -44,6 +54,17 @@ public class ControllerNode extends Thread {
             JOptionPane.showMessageDialog(null, "error ocurrido recibiendo algún paquete\n message:" + e.getMessage(), "Atención!", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    public void addDisk() throws ClassNotFoundException, SQLException {
+        DiskNodeData d = new DiskNodeData();
+        d.insert();
+        
+    }
+
+    public void disableDisk(int diskNumber) throws ClassNotFoundException, SQLException {
+        DiskNodeData d = new DiskNodeData();
+        d.disable(diskNumber);
     }
 
 }
