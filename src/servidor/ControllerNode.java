@@ -5,7 +5,6 @@ import Domain.DiskNode;
 import Domain.Libro;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -35,19 +34,16 @@ public class ControllerNode extends Thread {
             int puerto = 69;
             DatagramSocket socketUDP = new DatagramSocket(puerto);
 
-            byte[] buffer = new byte[1000];
-
             while (true) {
 
+                byte[] buffer = new byte[1000];
                 DatagramPacket datagramPacketReceived = new DatagramPacket(buffer, buffer.length);//envio de un  paquete 
                 socketUDP.receive(datagramPacketReceived);
-
                 System.out.println("solicitud recibida!");
-
                 String peticionLlegada = new String(datagramPacketReceived.getData(), 0, datagramPacketReceived.getLength());
 
+                
                 if (peticionLlegada.equalsIgnoreCase("registrar")) {
-                    
 
                     String peticion = "si";
                     DatagramPacket datagramPacket = new DatagramPacket(peticion.getBytes(), peticion.getBytes().length, datagramPacketReceived.getAddress(), datagramPacketReceived.getPort());
@@ -59,14 +55,10 @@ public class ControllerNode extends Thread {
                     DatagramPacket temp = new DatagramPacket(buffer2, buffer2.length);
                     socketUDP.receive(temp);
 
-                    
                     Libro libro = SerializationUtils.deserialize(temp.getData());
                     System.out.println(libro.toString());
-                    
 
-                }
-
-                if (peticionLlegada.equalsIgnoreCase("lista")) {
+                } else if (peticionLlegada.equalsIgnoreCase("lista")) {
 
                     int size = discosActivos.size();
                 }
