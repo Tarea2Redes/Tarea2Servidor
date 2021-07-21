@@ -5,6 +5,7 @@ import Domain.DiskNode;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,9 +21,14 @@ public class ControllerNode extends Thread {
     @Override
     public void run() {
 
-        System.out.println("controller node is running... listen in port: 69");
-
         try {
+
+            DiskNodeData ddd = new DiskNodeData();
+
+            ArrayList<DiskNode> discosActivos = ddd.getActiveList();
+
+            System.out.println("controller node is running... listen in port: 69");
+
             int puerto = 69;
 
             DatagramSocket socketUDP = new DatagramSocket(puerto);
@@ -44,6 +50,7 @@ public class ControllerNode extends Thread {
 
                 if (peticionLlegada.equalsIgnoreCase("lista")) {
 
+                        int size = discosActivos.size();
                 }
 
                 Thread.sleep(100);
@@ -59,7 +66,7 @@ public class ControllerNode extends Thread {
     public void addDisk() throws ClassNotFoundException, SQLException {
         DiskNodeData d = new DiskNodeData();
         d.insert();
-        
+
     }
 
     public void disableDisk(int diskNumber) throws ClassNotFoundException, SQLException {

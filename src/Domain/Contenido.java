@@ -1,21 +1,17 @@
 
 package Domain;
 
-/**
- *
- * @author Estudiante
- */
-public class Contenido {
+import java.io.Serializable;
+
+
+public class Contenido implements Serializable{
     
-   private int isbn;
-   private String contenido; 
+    private int isbn;
+    private String contenido;
 
     public Contenido(int isbn, String contenido) {
         this.isbn = isbn;
         this.contenido = contenido;
-    }
-
-    public Contenido() {
     }
 
     public int getIsbn() {
@@ -33,8 +29,7 @@ public class Contenido {
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }
-   
-   
-   
-   
+    
+    
+    
 }
