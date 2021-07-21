@@ -1,13 +1,10 @@
-
 package Domain;
 
 import java.io.File;
 import java.io.Serializable;
 
+public class Libro implements Serializable {
 
-public class Libro implements Serializable{
-    
-  
     private Metadata metadata;
     private Contenido contenido;
 
@@ -15,8 +12,6 @@ public class Libro implements Serializable{
         this.metadata = metadata;
         this.contenido = contenido;
     }
-    
-    
 
     public Contenido getContenido() {
         return contenido;
@@ -26,10 +21,6 @@ public class Libro implements Serializable{
         this.contenido = contenido;
     }
 
-    
-
-  
-
     public Metadata getMetadata() {
         return metadata;
     }
@@ -38,8 +29,9 @@ public class Libro implements Serializable{
         this.metadata = metadata;
     }
 
-    
-    
-    
-    
+    @Override
+    public String toString() {
+        return "Libro{" + "metadata=" + metadata.toString() + ", contenido=" + contenido.toString() + '}';
+    }
+
 }

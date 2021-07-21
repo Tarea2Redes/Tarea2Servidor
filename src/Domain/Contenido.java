@@ -1,11 +1,9 @@
-
 package Domain;
 
 import java.io.Serializable;
 
+public class Contenido implements Serializable {
 
-public class Contenido implements Serializable{
-    
     private int isbn;
     private String contenido;
 
@@ -29,7 +27,10 @@ public class Contenido implements Serializable{
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "contenido=" + contenido;
+    }
+
 }

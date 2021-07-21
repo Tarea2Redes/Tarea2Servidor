@@ -1,16 +1,14 @@
-
 package Domain;
 
 import java.io.Serializable;
 
+public class Metadata implements Serializable {
 
-public class Metadata implements Serializable{
-    
     private String titulo;
     private String autor;
     private String editorial;
     private String genero;
-    
+
     private String paginas;
     private int isbn;
 
@@ -63,7 +61,7 @@ public class Metadata implements Serializable{
         this.genero = fecha;
     }
 
-     public String getPaginas() {
+    public String getPaginas() {
         return paginas;
     }
 
@@ -71,9 +69,9 @@ public class Metadata implements Serializable{
         this.paginas = paginas;
     }
 
+    @Override
+    public String toString() {
+        return "Metadata{" + "isbn=" + isbn + "titulo=" + titulo + ", autor=" + autor + ", editorial=" + editorial + ", genero=" + genero + ", paginas=" + paginas + '}';
+    }
 
-    
-    
-    
-    
 }

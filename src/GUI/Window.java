@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import servidor.ControllerNode;
 
 /**
@@ -22,15 +23,14 @@ public class Window extends javax.swing.JFrame {
             DiskNodeData d = new DiskNodeData();
             ArrayList<DiskNode> list = d.getActiveList();
 
-            
             String[] es = new String[list.size()];
-            
+
             for (int i = 0; i < es.length; i++) {
                 es[i] = String.valueOf(list.get(i).getNumber());
             }
-            
+
             jComboBox1 = new JComboBox<>(es);
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -150,8 +150,14 @@ public class Window extends javax.swing.JFrame {
         int number = Integer.parseInt(jTextField1.getText());
 
         ControllerNode cN = new ControllerNode();
+
         try {
-            cN.disableDisk(number);
+
+            if (cN.getNumActivos() > 3) {
+                cN.disableDisk(number);
+            } else {
+                JOptionPane.showMessageDialog(this, "Deben haber al menos 3 discos activos!", "Atención!", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

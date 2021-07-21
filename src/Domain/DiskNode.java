@@ -42,7 +42,6 @@ public class DiskNode {
 
     private void contruirRaF() throws IOException {
         
-        
         FragmentoLibroData d = new FragmentoLibroData(number);
         this.raf = d.getFile(); 
 
