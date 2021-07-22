@@ -12,6 +12,9 @@ public class Metadata implements Serializable {
     private String paginas;
     private int isbn;
 
+    
+     public Metadata(){}
+    
     public Metadata(String titulo, String autor, String editorial, String genero, String paginas, int isbn) {
         this.titulo = titulo;
         this.autor = autor;

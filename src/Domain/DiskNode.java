@@ -3,7 +3,6 @@ package Domain;
 
 import Data.FragmentoLibroData;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,12 +12,11 @@ import java.util.logging.Logger;
  */
 public class DiskNode {
     
-    private RandomAccessFile raf; // contiene objetos Fragmento Libro
     private int number;
     private int active;
+    private  FragmentoLibroData data;
 
     public DiskNode(int number, int active) {
-        this.raf = raf;
         this.number = number;
         this.active = active;
         try {
@@ -28,8 +26,8 @@ public class DiskNode {
         }
     }
 
-    public RandomAccessFile getRaf() {
-        return raf;
+    public FragmentoLibroData Storage() {
+        return data;
     }
 
     public int getNumber() {
@@ -42,8 +40,7 @@ public class DiskNode {
 
     private void contruirRaF() throws IOException {
         
-        FragmentoLibroData d = new FragmentoLibroData(number);
-        this.raf = d.getFile(); 
+        data = new FragmentoLibroData(number);
 
     }
     

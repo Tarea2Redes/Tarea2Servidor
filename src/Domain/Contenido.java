@@ -12,6 +12,9 @@ public class Contenido implements Serializable {
         this.contenido = contenido;
     }
 
+    public Contenido(){
+        
+    }
     public int getIsbn() {
         return isbn;
     }

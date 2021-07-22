@@ -62,7 +62,7 @@ public class FragmentoLibroData {
     }
 
     //insertar al final del archivo
-    public boolean addAtEnd(FragmentoLibro producto) throws IOException {
+    public boolean add(FragmentoLibro producto) throws IOException {
         boolean success = create(this.cantidadRegistros, producto);
         if (success) {
             ++this.cantidadRegistros;

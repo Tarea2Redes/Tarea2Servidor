@@ -137,9 +137,9 @@ public class Window extends javax.swing.JFrame {
         ControllerNode cN = new ControllerNode();
         try {
             cN.addDisk();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "DiskNode agregado!", "Respuesta!", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -153,14 +153,16 @@ public class Window extends javax.swing.JFrame {
 
         try {
 
-            if (cN.getNumActivos() > 3) {
-                cN.disableDisk(number);
+            if (cN.getNumActivos() > 4) {
+                if (number == 1) {
+                    JOptionPane.showMessageDialog(this, "fatal_error:: La unidad #1 no se puede borrar!", "Atención!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    cN.disableDisk(number);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Deben haber al menos 3 discos activos!", "Atención!", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -13,6 +13,9 @@ public class Libro implements Serializable {
         this.contenido = contenido;
     }
 
+    public Libro(){
+        
+    }
     public Contenido getContenido() {
         return contenido;
     }
