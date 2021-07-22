@@ -6,15 +6,17 @@ public class Contenido implements Serializable {
 
     private int isbn;
     private String contenido;
+    static final long serialVersionUID = 2L;
 
     public Contenido(int isbn, String contenido) {
         this.isbn = isbn;
         this.contenido = contenido;
     }
 
-    public Contenido(){
-        
+    public Contenido() {
+
     }
+
     public int getIsbn() {
         return isbn;
     }

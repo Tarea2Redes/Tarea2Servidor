@@ -1,21 +1,22 @@
 package Domain;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class Libro implements Serializable {
 
     private Metadata metadata;
     private Contenido contenido;
+    static final long serialVersionUID = 1L;
 
     public Libro(Metadata metadata, Contenido contenido) {
         this.metadata = metadata;
         this.contenido = contenido;
     }
 
-    public Libro(){
-        
+    public Libro() {
+
     }
+
     public Contenido getContenido() {
         return contenido;
     }

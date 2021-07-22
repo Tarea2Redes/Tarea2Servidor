@@ -1,6 +1,6 @@
 package Data;
 
-import Domain.FragmentoLibro;
+import Domain.CintaDisco;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -42,7 +42,7 @@ public class FragmentoLibroData {
     }
 
     //insertar un nuevo registro en una posicion específica
-    private boolean create(int position, FragmentoLibro frafg) throws IOException {
+    private boolean create(int position, CintaDisco frafg) throws IOException {
         //primero: verificar que sea válida la inserción
         if (position < 0 && position > this.cantidadRegistros) {
             return false;
@@ -54,15 +54,15 @@ public class FragmentoLibroData {
                 randomAccessFile.seek(position * this.tamagnoDelRegistro);
                 randomAccessFile.writeUTF(frafg.getData());
                 randomAccessFile.writeInt(frafg.getIsbn());
-                randomAccessFile.writeInt(frafg.getTipo());
-                randomAccessFile.writeInt(frafg.getNumFragmento());
+                randomAccessFile.writeInt(frafg.getBitparidad());
+                randomAccessFile.writeInt(frafg.getFragOrder());
                 return true;
             }
         }
     }
 
     //insertar al final del archivo
-    public boolean add(FragmentoLibro producto) throws IOException {
+    public boolean add(CintaDisco producto) throws IOException {
         boolean success = create(this.cantidadRegistros, producto);
         if (success) {
             ++this.cantidadRegistros;
@@ -71,9 +71,9 @@ public class FragmentoLibroData {
     }
 
     //obtener un registro
-    private FragmentoLibro getRegister(int position) throws IOException {
+    private CintaDisco getRegister(int position) throws IOException {
         
-        FragmentoLibro objetoNulo = null;
+        CintaDisco objetoNulo = null;
         
         //validar la posición
         if (position >= 0 && position <= this.cantidadRegistros) {
@@ -81,7 +81,7 @@ public class FragmentoLibroData {
             randomAccessFile.seek(position * this.tamagnoDelRegistro);
 
             //llevamos a cabo la lectura
-            FragmentoLibro temp = new FragmentoLibro();
+            CintaDisco temp = new CintaDisco();
             temp.setData(randomAccessFile.readUTF());
             temp.setIsbn(randomAccessFile.readInt());
             temp.setTipo(randomAccessFile.readInt());
@@ -94,11 +94,11 @@ public class FragmentoLibroData {
     }
 
     //retornar una lista de productos escritos en el archivo
-    public ArrayList<FragmentoLibro> getAll() throws IOException {
-        ArrayList<FragmentoLibro> lista = new ArrayList<>();
+    public ArrayList<CintaDisco> getAll() throws IOException {
+        ArrayList<CintaDisco> lista = new ArrayList<>();
 
         for (int i = 0; i < this.cantidadRegistros; i++) {
-            FragmentoLibro temp = this.getRegister(i);
+            CintaDisco temp = this.getRegister(i);
 
             if (temp != null) {
                 lista.add(temp);

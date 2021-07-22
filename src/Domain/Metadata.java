@@ -8,13 +8,13 @@ public class Metadata implements Serializable {
     private String autor;
     private String editorial;
     private String genero;
-
     private String paginas;
     private int isbn;
+    static final long serialVersionUID = 3L;
 
-    
-     public Metadata(){}
-    
+    public Metadata() {
+    }
+
     public Metadata(String titulo, String autor, String editorial, String genero, String paginas, int isbn) {
         this.titulo = titulo;
         this.autor = autor;
